@@ -72,11 +72,11 @@
                     "swing_mode": {
                         "state": {
                             "auto": "Auto",
-                            "uppermost": "Position 1 (highest)",
+                            "uppermost": "Position 1",
                             "upper_center": "Position 2",
-                            "central": "Position 3 (central)",
+                            "central": "Position 3",
                             "lower_center": "Position 4",
-                            "lowermost": "Position 5 (lowest)"
+                            "lowermost": "Position 5"
                         }
                     }
                 }

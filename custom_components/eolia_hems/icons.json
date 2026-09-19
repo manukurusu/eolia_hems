@@ -13,6 +13,16 @@
               "level_3": "mdi:fan-speed-3",
               "level_4": "mdi:fan-chevron-up"
             }
+          },
+          "swing_mode": {
+            "state": {
+              "auto": "mdi:arrow-expand-vertical",
+              "uppermost": "mdi:arrow-up-thin",
+              "upper_center": "mdi:arrow-top-right-thin",
+              "central": "mdi:arrow-right-thin",
+              "lower_center": "mdi:arrow-bottom-right-thin",
+              "lowermost": "mdi:arrow-down-thin"
+            }
           }
         }
       }
