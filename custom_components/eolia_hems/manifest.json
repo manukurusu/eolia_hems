@@ -1,15 +1,23 @@
 {
   "domain": "eolia_hems",
   "name": "Eolia HEMS",
-  "codeowners": ["@manukurusu"],
+  "codeowners": [
+    "@manukurusu"
+  ],
   "config_flow": true,
-  "dependencies": ["network"],
+  "dependencies": [
+    "network"
+  ],
   "documentation": "https://github.com/manukurusu/eolia_hems",
   "integration_type": "hub",
   "iot_class": "local_polling",
   "issue_tracker": "https://github.com/manukurusu/eolia_hems/issues",
-  "loggers": ["pyhems"],
-  "requirements": ["pyhems==0.8.10"],
+  "loggers": [
+    "pyhems"
+  ],
+  "requirements": [
+    "pyhems==0.8.10"
+  ],
   "single_config_entry": true,
-  "version": "0.0.0"
+  "version": "0.0.1"
 }
