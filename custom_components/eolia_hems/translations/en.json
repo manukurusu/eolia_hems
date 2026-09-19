@@ -1,0 +1,149 @@
+{
+    "config": {
+        "abort": {
+            "cannot_connect": "Home Assistant could not start the multicast listener. Verify that UDP multicast traffic (224.0.23.0:3610) is allowed on the host network.",
+            "reconfigure_successful": "Network interface updated successfully",
+            "single_instance_allowed": "Already configured. Only a single configuration is possible.",
+            "unknown": "Unexpected error while validating the configuration"
+        },
+        "error": {
+            "cannot_connect": "Home Assistant could not start the multicast listener. Verify that UDP multicast traffic (224.0.23.0:3610) is allowed on the host network.",
+            "unknown": "Unexpected error while validating the configuration"
+        },
+        "step": {
+            "reconfigure": {
+                "data": {
+                    "interface": "Network interface"
+                },
+                "data_description": {
+                    "interface": "Select the network interface to use for Eolia HEMS communication. Select Auto to let Home Assistant automatically detect the appropriate interface."
+                },
+                "description": "Change the network interface for Eolia HEMS communication.",
+                "title": "Reconfigure Eolia HEMS"
+            },
+            "user": {
+                "data": {
+                    "interface": "Network interface"
+                },
+                "data_description": {
+                    "interface": "Select the network interface to use for Eolia HEMS communication. Select Auto to let Home Assistant automatically detect the appropriate interface."
+                },
+                "description": "Home Assistant automatically binds to the Eolia HEMS multicast channel (224.0.23.0:3610) and begins listening for devices.",
+                "title": "Set up Eolia HEMS"
+            }
+        }
+    },
+    "device": {
+        "class_0130": {
+            "name": "Home air conditioner"
+        },
+        "unknown_class": {
+            "name": "Eolia HEMS device {class_code}"
+        }
+    },
+    "entity": {
+        "binary_sensor": {
+            "class_0000_epc_88": {
+                "name": "Fault status",
+                "state": {
+                    "off": "No fault has occurred.",
+                    "on": "Fault occurred."
+                }
+            }
+        },
+        "button": {
+            "class_0130_epc_d0": {
+                "name": "Buzzer"
+            }
+        },
+        "climate": {
+            "climate": {
+                "state_attributes": {
+                    "fan_mode": {
+                        "state": {
+                            "auto": "Auto",
+                            "level_1": "Level 1",
+                            "level_2": "Level 2",
+                            "level_3": "Level 3",
+                            "level_4": "Level 4",
+                            "level_5": "Level 5",
+                            "level_6": "Level 6",
+                            "level_7": "Level 7",
+                            "level_8": "Level 8"
+                        }
+                    },
+                    "swing_mode": {
+                        "state": {
+                            "auto": "Auto",
+                            "uppermost": "Position 1 (highest)",
+                            "upper_center": "Position 2",
+                            "central": "Position 3 (central)",
+                            "lower_center": "Position 4",
+                            "lowermost": "Position 5 (lowest)"
+                        }
+                    }
+                }
+            }
+        },
+        "sensor": {
+            "class_0000_epc_85": {
+                "name": "Measured cumulative electric energy consumption"
+            },
+            "class_0000_epc_89": {
+                "name": "Fault description",
+                "state": {
+                    "changing_battery": "Changing the battery",
+                    "cleaning": "Cleaning (filters, etc.)",
+                    "fault": "Fault",
+                    "no_fault": "No fault",
+                    "recover_operation_no_required": "Recover operation no required",
+                    "repair_location_unkown": "Repair location unknown",
+                    "reset_button": "Faults that can be recovered from by pressing the reset button.",
+                    "set_incorrectly": "Device set incorrectly",
+                    "supply": "Supply",
+                    "trun_off_or_unplug": "Faults that can be recovered from by turn off the power or unplug and reoperate.",
+                    "user_definable1": "User-definable domain 1"
+                }
+            },
+            "class_0130_epc_bb": {
+                "name": "Measured value of room temperature"
+            }
+        },
+        "switch": {
+            "class_0000_epc_8f": {
+                "name": "Power-saving operation setting",
+                "state": {
+                    "off": "Normal Operation",
+                    "on": "Power saving Operation"
+                }
+            }
+        }
+    },
+    "exceptions": {
+        "epc_not_writable": {
+            "message": "EPC {epc_list} is not writable by the device."
+        },
+        "runtime_start_failed": {
+            "message": "Failed to start runtime client: {error}"
+        },
+        "target_node_unknown": {
+            "message": "The target node address is unknown."
+        },
+        "target_temperature_required": {
+            "message": "A target temperature value is required."
+        },
+        "unsupported_value": {
+            "message": "Unsupported value: {value}"
+        }
+    },
+    "issues": {
+        "runtime_client_error": {
+            "description": "The Eolia HEMS integration encountered an error: {error}. This may be caused by network issues or device disconnection. Check your network configuration and ensure your Eolia HEMS devices are powered on.",
+            "title": "Eolia HEMS runtime error"
+        },
+        "runtime_inactive": {
+            "description": "No frames have been received from Eolia HEMS devices for more than {minutes} minutes. This may indicate that devices are offline or there is a network issue. Check that your Eolia HEMS devices are powered on and connected to the network.",
+            "title": "Eolia HEMS devices not responding"
+        }
+    }
+}

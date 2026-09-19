@@ -1,0 +1,6 @@
+{
+  "name": "Eolia HEMS",
+  "homeassistant": "2026.9.0",
+  "zip_release": true,
+  "filename": "eolia_hems.zip"
+}
