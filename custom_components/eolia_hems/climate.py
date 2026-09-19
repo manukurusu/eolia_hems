@@ -101,6 +101,28 @@ class EoliaHEMSClimateEntityDescription(ClimateEntityDescription):
     auto_direction_prop: EnumProp
     vertical_direction_prop: EnumProp
 
+_FAN_LEVEL_NAMES = {
+    "auto": "auto",
+    "level_1": "silent",
+    "level_2": "level_1",
+    "level_3": "level_2",
+    "level_4": "level_3",
+    "level_6": "level_4",
+}
+
+
+def _fan_mode_prop() -> EnumProp:
+    registry = EnumProp.from_registry(DeviceClass.HOME_AIR_CONDITIONER, EPC_FAN_SPEED)
+    return EnumProp.from_mapping(
+        EPC_FAN_SPEED,
+        {
+            _FAN_LEVEL_NAMES[key]: value
+            for key, value in registry.codec.by_key.items()
+            if key in _FAN_LEVEL_NAMES
+        },
+    )
+
+
 _DESCRIPTIONS: dict[int, EoliaHEMSClimateEntityDescription] = {
     DeviceClass.HOME_AIR_CONDITIONER: EoliaHEMSClimateEntityDescription(
         key="climate",
@@ -122,9 +144,7 @@ _DESCRIPTIONS: dict[int, EoliaHEMSClimateEntityDescription] = {
         humidity_prop=NumericProp.from_registry(
             DeviceClass.HOME_AIR_CONDITIONER, EPC_ROOM_HUMIDITY
         ),
-        fan_mode_prop=EnumProp.from_registry(
-            DeviceClass.HOME_AIR_CONDITIONER, EPC_FAN_SPEED
-        ),
+        fan_mode_prop=_fan_mode_prop(),
         auto_direction_prop=EnumProp.from_registry(
             DeviceClass.HOME_AIR_CONDITIONER, EPC_AUTO_DIRECTION
         ),

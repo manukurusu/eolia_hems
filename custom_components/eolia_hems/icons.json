@@ -7,14 +7,11 @@
           "fan_mode": {
             "state": {
               "auto": "mdi:fan-auto",
+              "silent": "mdi:fan-chevron-down",
               "level_1": "mdi:fan-speed-1",
-              "level_2": "mdi:fan-speed-1",
-              "level_3": "mdi:fan-speed-1",
-              "level_4": "mdi:fan-speed-2",
-              "level_5": "mdi:fan-speed-2",
-              "level_6": "mdi:fan-speed-3",
-              "level_7": "mdi:fan-speed-3",
-              "level_8": "mdi:fan-speed-3"
+              "level_2": "mdi:fan-speed-2",
+              "level_3": "mdi:fan-speed-3",
+              "level_4": "mdi:fan-chevron-up"
             }
           }
         }
