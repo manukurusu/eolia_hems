@@ -120,7 +120,6 @@ async def async_migrate_entry(
     ) -> bool:
     """Migrate old config entry to new format."""
     if entry.version == 1 and entry.minor_version < 1:
-        # Version 1.0 → 1.1: Move CONF_INTERFACE from options to data
         new_data = dict(entry.data)
         new_options = dict(entry.options)
         if CONF_INTERFACE in new_options:

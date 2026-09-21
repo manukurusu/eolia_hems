@@ -97,7 +97,6 @@ class EoliaHEMSConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             return self.async_create_entry(
                 title="HEMS", data={CONF_INTERFACE: interface}
             )
-        # Update interface in data; preserve existing options
         return self.async_update_reload_and_abort(
             entry, data={CONF_INTERFACE: interface}
         )

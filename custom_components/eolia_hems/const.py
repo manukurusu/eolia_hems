@@ -167,7 +167,6 @@ MRA_UNIT_TO_HA_UNIT: dict[str, str | None] = {
     "r/min": REVOLUTIONS_PER_MINUTE,
     "µg/m³": UnitOfDensity.MICROGRAMS_PER_CUBIC_METER,
     "mHz": UnitOfFrequency.MILLIHERTZ,
-    # No HA equivalent — MRA string is used as-is.
     "Ah": None,
     "digit": None,
     "klux": None,
@@ -206,8 +205,6 @@ UNIT_DEVICE_CLASS_RULES: tuple[
         (
             ("humidity", SensorDeviceClass.HUMIDITY, NumberDeviceClass.HUMIDITY),
             ("battery", SensorDeviceClass.BATTERY, NumberDeviceClass.BATTERY),
-            # Number entities never reach these sensor-only keywords, but
-            # keeping both columns in the same row keeps the table flat.
             ("remaining", SensorDeviceClass.BATTERY, None),
             ("soc", SensorDeviceClass.BATTERY, None),
             ("moisture", SensorDeviceClass.MOISTURE, NumberDeviceClass.MOISTURE),
@@ -216,8 +213,6 @@ UNIT_DEVICE_CLASS_RULES: tuple[
     (
         ("Wh", "kWh", "MJ"),
         (
-            # Static ratings (e.g. "AC chargeable capacity") don't fit
-            # measurement device classes.
             ("capacity", None, None),
             ("stored", SensorDeviceClass.ENERGY_STORAGE, NumberDeviceClass.ENERGY_STORAGE),
             ("", SensorDeviceClass.ENERGY, NumberDeviceClass.ENERGY),
@@ -226,7 +221,6 @@ UNIT_DEVICE_CLASS_RULES: tuple[
     (
         ("L",),
         (
-            # Static tank capacity is not a variable measurement.
             ("capacity", None, None),
             ("tank", SensorDeviceClass.VOLUME_STORAGE, NumberDeviceClass.VOLUME_STORAGE),
             ("remaining", SensorDeviceClass.VOLUME_STORAGE, NumberDeviceClass.VOLUME_STORAGE),

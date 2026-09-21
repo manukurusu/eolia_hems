@@ -85,8 +85,11 @@ _HA_TO_PYHEMS_MODE: dict[HVACMode, str] = {
     HVACMode.DRY: "dehumidification",
 }
 
+_MIN_TEMP = 16.0
+_MAX_TEMP = 30.0
+
 SWING_AUTO = "auto"
-_A1_AUTO = "auto"
+_A1_AUTO = "auto_vertical"
 _A1_NON_AUTOMATIC = "non_auto"
 
 @dataclass(frozen=True, kw_only=True)
@@ -186,10 +189,14 @@ class EoliaHEMSClimate(EoliaHEMSEntity, ClimateEntity):
         self._subscribed_epcs: frozenset[int] = DEDICATED_PLATFORM_REQUIRED_EPCS.get(
             node.eoj.class_code, frozenset()
         )
-        if description.target_temp_prop.min_value is not None:
-            self._attr_min_temp: float = description.target_temp_prop.min_value
-        if description.target_temp_prop.max_value is not None:
-            self._attr_max_temp: float = description.target_temp_prop.max_value
+        registry_min = description.target_temp_prop.min_value
+        registry_max = description.target_temp_prop.max_value
+        self._attr_min_temp: float = (
+            _MIN_TEMP if registry_min is None else max(registry_min, _MIN_TEMP)
+        )
+        self._attr_max_temp: float = (
+            _MAX_TEMP if registry_max is None else min(registry_max, _MAX_TEMP)
+        )
         self._attr_target_temperature_step:float = description.target_temp_prop.step
         self._attr_precision: float = description.target_temp_prop.precision
 
