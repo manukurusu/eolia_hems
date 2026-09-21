@@ -16,7 +16,7 @@
     "pyhems"
   ],
   "requirements": [
-    "pyhems==0.8.10"
+    "pyhems==0.8.11"
   ],
   "single_config_entry": true,
   "version": "0.1.0"
