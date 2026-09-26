@@ -17,6 +17,7 @@ from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from pyhems import REGISTRY, EntityDefinition, NodeState, Property
 
 from .const import (
+    CONF_MODEL_OVERRIDES,
     DEDICATED_PLATFORM_EPCS,
     DOMAIN,
     EXCLUDED_EPCS_BY_CLASS,
@@ -82,10 +83,16 @@ def _get_or_build_device_info(
             "class_code": f"0x{node.eoj.class_code:04X}",
         }
 
+    model_overrides: dict[str, str] = (
+        coordinator.config_entry.options.get(CONF_MODEL_OVERRIDES, {})
+        if coordinator.config_entry is not None
+        else {}
+    )
+
     device_info = DeviceInfo(
         identifiers={(DOMAIN, node.device_key)},
         manufacturer=node.manufacturer_name,
-        model=node.product_code,
+        model=model_overrides.get(node.device_key, node.product_code),
         serial_number=node.serial_number,
         suggested_area=suggested_area,
         translation_key=translation_key,

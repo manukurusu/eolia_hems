@@ -142,5 +142,26 @@
             "description": "No frames have been received from Eolia HEMS devices for more than {minutes} minutes. This may indicate that devices are offline or there is a network issue. Check that your Eolia HEMS devices are powered on and connected to the network.",
             "title": "Eolia HEMS devices not responding"
         }
+    },
+    "options": {
+        "abort": {
+            "no_devices": "No Eolia HEMS devices have been discovered yet. Wait until your devices appear in Home Assistant, then try again."
+        },
+        "step": {
+            "init": {
+                "title": "Device model",
+                "description": "Select the device whose model you want to set.",
+                "data": {
+                    "device": "Device"
+                }
+            },
+            "model": {
+                "title": "Device model",
+                "description": "The device reports its model as: {reported_model}\n\nEnter the model to show instead (for example in Apple Home via HomeKit). Leave empty to use the reported model.",
+                "data": {
+                    "model": "Model"
+                }
+            }
+        }
     }
 }

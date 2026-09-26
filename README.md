@@ -98,6 +98,10 @@ Everything is done in the UI.
 
 Units appear as devices shortly afterwards. Only **one** instance can exist (`single_config_entry`), since a single listener serves every unit. To change the interface later, use **Reconfigure**; no devices or entities are lost.
 
+### Device model
+
+Some units report a placeholder model such as `CS-0000OOOO`, and bridges like HomeKit pass that on as is. To show the real model, open **Configure** on the integration, pick the device and enter the model (for example `CS-X405D2`). Leave the field empty to go back to the model reported by the unit. The integration reloads to apply the change.
+
 ## Entities
 
 | Platform | Entity | Notes |

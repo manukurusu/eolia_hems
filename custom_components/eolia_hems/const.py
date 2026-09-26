@@ -37,6 +37,9 @@ from pyhems import (
 
 DOMAIN = "eolia_hems"
 CONF_INTERFACE = "interface"
+CONF_DEVICE = "device"
+CONF_MODEL = "model"
+CONF_MODEL_OVERRIDES = "model_overrides"
 DEFAULT_INTERFACE = "0.0.0.0"
 DEFAULT_POLL_INTERVAL = 60
 DEFAULT_FAST_POLL_INTERVAL = 10
