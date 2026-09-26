@@ -16,8 +16,7 @@
           },
           "swing_mode": {
             "state": {
-              "vertical": "mdi:arrow-decision-auto",
-              "off": "mdi:pause",
+              "auto": "mdi:arrow-decision-auto",
               "uppermost": "mdi:arrow-up-thin",
               "upper_center": "mdi:arrow-top-right-thin",
               "central": "mdi:arrow-right-thin",

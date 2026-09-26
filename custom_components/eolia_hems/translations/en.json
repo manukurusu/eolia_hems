@@ -71,8 +71,7 @@
                     },
                     "swing_mode": {
                         "state": {
-                            "vertical": "Auto",
-                            "off": "Fixed",
+                            "auto": "Auto",
                             "uppermost": "Position 1",
                             "upper_center": "Position 2",
                             "central": "Position 3",
