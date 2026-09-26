@@ -60,6 +60,7 @@
             "climate": {
                 "state_attributes": {
                     "fan_mode": {
+                        "name": "Fan",
                         "state": {
                             "auto": "Auto",
                             "silent": "Silent",
@@ -70,6 +71,7 @@
                         }
                     },
                     "swing_mode": {
+                        "name": "Swing",
                         "state": {
                             "auto": "Auto",
                             "uppermost": "Position 1",
