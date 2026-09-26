@@ -11,6 +11,13 @@ from homeassistant.components.climate import (
     ClimateEntityDescription,
 )
 from homeassistant.components.climate.const import (
+    FAN_AUTO,
+    FAN_HIGH,
+    FAN_LOW,
+    FAN_MEDIUM,
+    FAN_MIDDLE,
+    SWING_OFF,
+    SWING_VERTICAL,
     ClimateEntityFeature,
     HVACAction,
     HVACMode,
@@ -88,9 +95,13 @@ _HA_TO_PYHEMS_MODE: dict[HVACMode, str] = {
 _MIN_TEMP = 16.0
 _MAX_TEMP = 30.0
 
-SWING_AUTO = "auto"
+# HomeKit only recognises Home Assistant's predefined fan and swing modes:
+# vertical/off become the swing toggle and low..high the rotation speed.
+FAN_SILENT = "silent"
+SWING_AUTO = SWING_VERTICAL
 _A1_AUTO = "auto_vertical"
 _A1_NON_AUTOMATIC = "non_auto"
+_SWING_OFF_FALLBACK = "central"
 
 @dataclass(frozen=True, kw_only=True)
 class EoliaHEMSClimateEntityDescription(ClimateEntityDescription):
@@ -105,12 +116,12 @@ class EoliaHEMSClimateEntityDescription(ClimateEntityDescription):
     vertical_direction_prop: EnumProp
 
 _FAN_LEVEL_NAMES = {
-    "auto": "auto",
-    "level_1": "silent",
-    "level_2": "level_1",
-    "level_3": "level_2",
-    "level_4": "level_3",
-    "level_6": "level_4",
+    "auto": FAN_AUTO,
+    "level_1": FAN_SILENT,
+    "level_2": FAN_LOW,
+    "level_3": FAN_MIDDLE,
+    "level_4": FAN_MEDIUM,
+    "level_6": FAN_HIGH,
 }
 
 
@@ -244,6 +255,7 @@ class EoliaHEMSClimate(EoliaHEMSEntity, ClimateEntity):
             EPC_AIR_FLOW_VERTICAL in node.set_epcs
             and _A1_NON_AUTOMATIC in a1_options
         ):
+            modes.append(SWING_OFF)
             modes.extend(description.vertical_direction_prop.options)
         return modes
 
@@ -397,6 +409,14 @@ class EoliaHEMSClimate(EoliaHEMSEntity, ClimateEntity):
         if swing_mode == SWING_AUTO:
             self._send_prop(desc.auto_direction_prop, _A1_AUTO)
             return
+        if swing_mode == SWING_OFF:
+            # Stop swinging and hold the last reported position.
+            current = desc.vertical_direction_prop.get(self._node)
+            swing_mode = (
+                current
+                if current in desc.vertical_direction_prop.options
+                else _SWING_OFF_FALLBACK
+            )
         if swing_mode not in desc.vertical_direction_prop.options:
             raise ServiceValidationError(
                 translation_domain=DOMAIN,

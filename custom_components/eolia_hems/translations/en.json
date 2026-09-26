@@ -63,15 +63,16 @@
                         "state": {
                             "auto": "Auto",
                             "silent": "Silent",
-                            "level_1": "Level 1",
-                            "level_2": "Level 2",
-                            "level_3": "Level 3",
-                            "level_4": "Level 4"
+                            "low": "Level 1",
+                            "middle": "Level 2",
+                            "medium": "Level 3",
+                            "high": "Level 4"
                         }
                     },
                     "swing_mode": {
                         "state": {
-                            "auto": "Auto",
+                            "vertical": "Auto",
+                            "off": "Fixed",
                             "uppermost": "Position 1",
                             "upper_center": "Position 2",
                             "central": "Position 3",

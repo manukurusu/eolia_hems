@@ -8,15 +8,16 @@
             "state": {
               "auto": "mdi:fan-auto",
               "silent": "mdi:fan-chevron-down",
-              "level_1": "mdi:fan-speed-1",
-              "level_2": "mdi:fan-speed-2",
-              "level_3": "mdi:fan-speed-3",
-              "level_4": "mdi:fan-chevron-up"
+              "low": "mdi:fan-speed-1",
+              "middle": "mdi:fan-speed-2",
+              "medium": "mdi:fan-speed-3",
+              "high": "mdi:fan-chevron-up"
             }
           },
           "swing_mode": {
             "state": {
-              "auto": "mdi:arrow-decision-auto",
+              "vertical": "mdi:arrow-decision-auto",
+              "off": "mdi:pause",
               "uppermost": "mdi:arrow-up-thin",
               "upper_center": "mdi:arrow-top-right-thin",
               "central": "mdi:arrow-right-thin",

@@ -15,8 +15,9 @@ Your air conditioner shows up as a native `climate` entity with heat, cool, dry 
   - Target temperature from **16 °C to 30 °C**, clamped to the range the unit reports
   - Current room temperature and humidity
   - Live `hvac_action`: cooling, heating, drying, idle, defrosting, preheating
-  - Fan modes: `auto`, `silent`, and levels 1 to 4
-  - Swing modes: `auto` plus five fixed vertical louver positions
+  - Fan modes: `auto`, `silent`, and levels 1 to 4 (`low`, `middle`, `medium`, `high`)
+  - Swing modes: `vertical` (auto), `off` (hold position) plus five fixed vertical louver positions
+  - Works as a HomeKit Heater Cooler with fan speed and swing controls
   - Turn on and turn off
 - **Push and poll.** Units announce changes themselves (ECHONET Lite INF), and a poller fills in the rest: 60 seconds normally, 10 seconds for fast-poll properties.
 - **Extra entities** for fault status, fault description, cumulative energy, power-saving operation and a buzzer.
@@ -42,7 +43,7 @@ The climate entity is built around these ECHONET Lite properties (EPCs):
 | --- | --- | --- |
 | `0x80` | Operation status | On, off |
 | `0xA0` | Air flow rate | Fan mode |
-| `0xA1` | Automatic air flow direction | Swing `auto` vs. fixed |
+| `0xA1` | Automatic air flow direction | Swing `vertical` vs. fixed |
 | `0xA4` | Air flow direction (vertical) | Fixed swing positions |
 | `0xAA` | Special state | Defrosting, preheating |
 | `0xB0` | Operation mode | HVAC mode |
@@ -54,18 +55,28 @@ Properties these units do not implement, or that would duplicate the climate ent
 
 ### Fan and swing labels
 
-Fan speed is reported as numbered levels and mapped to labels that match the remote control: `auto`, `silent`, then `level_1` to `level_4` with increasing airflow.
+Fan and swing modes use Home Assistant's standard names so that HomeKit (Heater Cooler) can show a fan speed slider and a swing toggle. The labels match the remote control.
+
+| Fan mode | Label | HomeKit |
+| --- | --- | --- |
+| `auto` | Auto | Fan auto toggle |
+| `silent` | Silent | Not shown |
+| `low` | Level 1 | Speed 25% |
+| `middle` | Level 2 | Speed 50% |
+| `medium` | Level 3 | Speed 75% |
+| `high` | Level 4 | Speed 100% |
 
 | Swing mode | Label | Icon |
 | --- | --- | --- |
-| `auto` | Auto | `mdi:arrow-decision-auto` |
+| `vertical` | Auto | `mdi:arrow-decision-auto` |
+| `off` | Fixed | `mdi:pause` |
 | `uppermost` | Position 1 | `mdi:arrow-up-thin` |
 | `upper_center` | Position 2 | `mdi:arrow-top-right-thin` |
 | `central` | Position 3 | `mdi:arrow-right-thin` |
 | `lower_center` | Position 4 | `mdi:arrow-bottom-right-thin` |
 | `lowermost` | Position 5 | `mdi:arrow-down-thin` |
 
-Choosing a fixed position switches the unit out of automatic direction control and sets the louver in one write. Choosing `auto` hands control back to the unit.
+Choosing a fixed position switches the unit out of automatic direction control and sets the louver in one write. `off` stops the swing and holds the last reported position (Position 3 if unknown). `vertical` hands control back to the unit. In HomeKit, the swing toggle switches between `vertical` and `off`.
 
 ## Requirements
 
